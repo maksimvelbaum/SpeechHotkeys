@@ -108,5 +108,7 @@ stop_word2 = "stop"  # alternative stop word
 
 Hope it was helpful
 
-![coffee](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/coffee.gif?raw=true)
+[![coffee](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/coffee.gif?raw=true)](https://www.buymeacoffee.com/maksim_velbaum)
+
+
 
