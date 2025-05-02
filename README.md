@@ -13,3 +13,8 @@ I used Python 3.13.3
 5. Open PowerShell with Admin Rights and paste "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
  ```bash
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+6.Open PowerShell or CMD and check python version  "python --version" if it is Python 3.13.3 we are good to go 
+ ```bash
+python --version
+```
