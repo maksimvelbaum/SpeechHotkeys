@@ -103,3 +103,6 @@ stop_word2 = "stop"  # alternative stop word
 17. The final step is configuring the Autohotkey script.  
     A sample profile for **The Elder Scrolls IV: Oblivion Remastered** is included.  
     (In-game, bind spells to NUM1–NUM9)
+
+![6](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/6.png?raw=true)
+
