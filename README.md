@@ -12,7 +12,7 @@ I used Python 3.13.3
 
 1. Download and install [Python 3.13.2](https://www.python.org/downloads/)
 2. Download and install [AutoHotkey v2](https://www.autohotkey.com/) (tested on version 2.0.19)
-3. Download [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (tested on version: 2025-05-01-git-707c04fe06 — also attached in the repo)
+3. Download [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (tested on version: 2025-05-01-git-707c04fe06)
 4. Extract ffmpeg somewhere, for example to `C:\ffmpeg`.  
    Open Windows Search and find "Edit the system environment variables" > Advanced > Environment Variables > System Variables > choose `Path` and click **Edit**, then **New**, and add `C:\ffmpeg\bin`.  
    Save and close.
@@ -132,7 +132,7 @@ Hope it was helpful
 
 1. Скачайте и установите [Python 3.13.2](https://www.python.org/downloads/)
 2. Скачайте и установите [AutoHotkey v2](https://www.autohotkey.com/) (проверено на версии 2.0.19)
-3. Скачайте [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (проверено на версии: 2025-05-01-git-707c04fe06 — также прилагается в репозитории)
+3. Скачайте [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (проверено на версии: 2025-05-01-git-707c04fe06)
 4. Распакуйте ffmpeg куда-нибудь, например в `C:\ffmpeg`.  
    Откройте поиск Windows и найдите "Изменить системные переменные среды" > Дополнительно > Переменные среды > Системные переменные > выберите `Path` и нажмите **Изменить**, затем **Создать**, и добавьте `C:\ffmpeg\bin`.  
    Сохраните и закройте.
