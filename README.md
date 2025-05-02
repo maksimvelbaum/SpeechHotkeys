@@ -1,7 +1,7 @@
 # SpeechHotkeys
 
 
-[[Creator Website ]](https://velbaum.cc)
+[[Creator Website ]](https://velbaum.cc) [BuymeaCoffee](https://buymeacoffee.com/maksim_velbaum)
 
 
 ## Setup
@@ -70,4 +70,4 @@ stop_word2 = "stop"  stop word for stoping script
 ```
 
 
-[buymeacoffee.com/maksim_velbaum](https://buymeacoffee.com/maksim_velbaum)
+
