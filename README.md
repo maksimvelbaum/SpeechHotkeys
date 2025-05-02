@@ -9,7 +9,7 @@ I used Python 3.13.3
 3. Download [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (tested on version: 2025-05-01-git-707c04fe06 — also attached in the repo)
 4. Extract ffmpeg somewhere, for example to `C:\ffmpeg`.  
    Open Windows Search and find "Edit the system environment variables" > Advanced > Environment Variables > System Variables > choose `Path` and click **Edit**, then **New**, and add `C:\ffmpeg\bin`.  
-   Save and close. (See pictures in the folder `98_README_PICTURES`)
+   Save and close.
 
 ![1](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/1.png?raw=true)  
 ![2](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/2.png?raw=true)  
