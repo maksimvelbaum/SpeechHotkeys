@@ -24,3 +24,23 @@ python --version
 cmd /c 01_install.bat
 ```
 I recommend to make install from terminal , in this case you will able to see error if they will appear.
+
+8. 01_install.bat will launch programm BUT most likely it will run on CPU , what is very slow, so close procgramm by clicking Ctrl+C
+
+9 Here you need to decide do you want use GPU for for Whisper AI or you will stay on CPU, if yu will stay on CPU proceed to step ...
+ 
+10.  If you ant you GPU, open terminal in folder and paste in terminal 
+    
+```bash
+.\venv\Scripts\activate
+```    
+11.  Intall pytorch == torch , I recommend to ask GPT wich version you need to install ,  ONLY FOR EXMAPLE I posting here for my video card RTX 3080
+
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cu118
+```   
+
+
+
+https://github.com/openai/whisper/blob/main/model-card.md
+
