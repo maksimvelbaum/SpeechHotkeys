@@ -1,7 +1,7 @@
 # SpeechHotkeys
 
 
-[[Creator Website ]](https://velbaum.cc) [[BuymeaCoffee]](https://buymeacoffee.com/maksim_velbaum)
+[[Creator Website ]](https://velbaum.cc) [[Buy me a coffee]](https://buymeacoffee.com/maksim_velbaum)
 
 
 ## Setup
