@@ -46,8 +46,10 @@ python -c "import torch; print(torch.cuda.get_device_name(0))"
 ```
 13. If you see something like NVIDIA GeForce RTX 3080  all done correctly.  Please do not post any issue about it , I just don't have time to deal with other video cards. 
 
-14. Now we need to choose [Model Card: Whisper](https://github.com/openai/whisper/blob/main/model-card.md) for English will be enought base or even tiny but if you using another language , small is much better choise
-
+14. Now we need to choose [Model Card: Whisper](https://github.com/openai/whisper/blob/main/model-card.md) for English will be enought base or even tiny but if you using another language , small is much better choise. Modes will be load at 
+```bash
+C:\Users\_user_\.cache\whisper
+```
 15. Open app.py with Notepead or any other IDE for editing.
 
 16. You need to change
