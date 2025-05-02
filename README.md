@@ -37,13 +37,19 @@ I recommend to make install from terminal , in this case you will able to see er
 11.  Intall pytorch == torch , I recommend to ask GPT wich version you need to install ,  ONLY FOR EXMAPLE I posting here for my video card RTX 3080
 
 ```bash
+pip uninstall torch
 pip install torch --index-url https://download.pytorch.org/whl/cu118
 ```   
+12. When installed , check that it is working
+```bash
+python -c "import torch; print(torch.cuda.get_device_name(0))"
+```
+13. If you see something like NVIDIA GeForce RTX 3080  all done correctly.  Please do not post any issue about it , I just don't have time to deal with other video cards. 
+
+14. Now we need to choose [Model Card: Whisper](https://github.com/openai/whisper/blob/main/model-card.md) for English will be enought base or even tiny but if you using another language , small is much better choise
 
 
 
-https://github.com/openai/whisper/blob/main/model-card.md
 
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="maksim_velbaum" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-
+[buymeacoffee.com/maksim_velbaum](https://buymeacoffee.com/maksim_velbaum)
