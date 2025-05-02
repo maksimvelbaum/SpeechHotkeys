@@ -50,7 +50,7 @@ else:
     FP16 = False
     print("🖥 Using CPU / Используем CPU")
 
-print("CUDA доступна:", torch.cuda.is_available())
+print("CUDA  avalible / доступна:", torch.cuda.is_available())
 if torch.cuda.is_available():
     print("Количество устройств:", torch.cuda.device_count())
     print("Имя устройства:", torch.cuda.get_device_name(0))
