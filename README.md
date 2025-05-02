@@ -33,7 +33,9 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 python --version
 ```
 7. Go back to folder SpeechHotkeys  and start 01_install  (Run anyway)  or make install from terminal (CMD/PowerShell) to see errors "cmd /c 01_install.bat"
-   
+
+![5](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/5.png?raw=true)
+
 ```bash
 cmd /c 01_install.bat
 ```
