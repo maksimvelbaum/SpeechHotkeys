@@ -21,13 +21,13 @@ THRESHOLD = 0.015  # Sound sensitivity / Чувствительность к з�
 
 SILENCE_DURATION = 0.3  # Silence duration before stopping / Длительность тишины перед остановкой
 PRE_RECORD_SECONDS = 1.0  # Length of the "past" sound buffer / Длина буфера "прошлого" звука
-LANGUAGE = 'ru'  # Processing language / Язык обработки
+LANGUAGE = 'en'  # Processing language / Язык обработки
 
 
 
 # 🔒 Hotkeys / Горячие фразы
-hotkey0 = ""  
-hotkey1 = ""
+hotkey0 = "fireball"  
+hotkey1 = "healing"
 hotkey2 = ""
 hotkey3 = ""
 hotkey4 = ""
@@ -52,8 +52,8 @@ else:
 
 print("CUDA  avalible / доступна:", torch.cuda.is_available())
 if torch.cuda.is_available():
-    print("Количество устройств:", torch.cuda.device_count())
-    print("Имя устройства:", torch.cuda.get_device_name(0))
+    print("Device qty / Количество устройств:", torch.cuda.device_count())
+    print("Device name / Имя устройства:", torch.cuda.get_device_name(0))
 
 
 # === Model Loading === → # === Загрузка модели ===
