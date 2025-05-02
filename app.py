@@ -1,110 +1,102 @@
-# Check CUDA Driver
-# python -c "import torch; print(torch.cuda.get_device_name(0))"
-# For GPU RTX3080. 
-# .\venv\Scripts\activate
-# pip install torch --index-url https://download.pytorch.org/whl/cu118
-
-
 import numpy as np
 import sounddevice as sd
 import whisper
 from collections import deque
 import keyboard
 import torch
+import os
+import sys
 
 # ==== Settings / Настройки ====
-SAMPLE_RATE = 16000  # Do not change, sound quality to send to AI / Не изменяй, качество звука для передачи в ИИ
-CHUNK_DURATION = 0.3  # Do not change, Chunk duration in seconds / Длительность фрагмента в секундах
-WHISPER_MODEL = 'small'  # tiny / base / small / medium / large  Whisper model being used / Используемая модель Whisper   
-#C:\Users\_USER_\.cache\whisper  Model will be loaded  here 
-THRESHOLD = 0.015  # Sound sensitivity / Чувствительность к звуку
+SAMPLE_RATE = 16000  # Do not change / Не изменяй
+CHUNK_DURATION = 0.3  # Do not change / Не изменяй
+WHISPER_MODEL = 'small'  # tiny / base / small / medium / large
+THRESHOLD = 0.015  # Sound sensitivity / Чувствительность
+SILENCE_DURATION = 0.3  # Silence stop delay / Задержка остановки
+PRE_RECORD_SECONDS = 1.0  # Audio buffer / Буфер
+LANGUAGE = 'en'  # Language / Язык
 
-SILENCE_DURATION = 0.3  # Silence duration before stopping / Длительность тишины перед остановкой
-PRE_RECORD_SECONDS = 1.0  # Length of the "past" sound buffer / Длина буфера "прошлого" звука
-LANGUAGE = 'en'  # Processing language / Язык обработки
-
-
-
-# 🔒 Hotkeys / Горячие фразы
-hotkey0 = "fireball"  
+# === Hotwords / Горячие слова ===
+hotkey0 = ""
 hotkey1 = "healing"
 hotkey2 = ""
-hotkey3 = ""
+hotkey3 = "fireball"
 hotkey4 = ""
 hotkey5 = ""
 hotkey6 = ""
 hotkey7 = ""
 hotkey8 = ""
 hotkey9 = ""
-stop_word = "стоп"  
+stop_word = "стоп"
 stop_word2 = "stop"
 
-# === Device identification / Определение устройства ===
+# === Logging / Логирование ===
+# log_buffer = deque(maxlen=100)
 
-if torch.cuda.is_available():
-    DEVICE = "cuda"
-    FP16 = True
-    print("⚡ Using GPU (CUDA) /  Используем GPU (CUDA)")
-else:
-    DEVICE = "cpu"
-    FP16 = False
-    print("🖥 Using CPU / Используем CPU")
+log_history = []
 
-print("CUDA  avalible / доступна:", torch.cuda.is_available())
-if torch.cuda.is_available():
-    print("Device qty / Количество устройств:", torch.cuda.device_count())
-    print("Device name / Имя устройства:", torch.cuda.get_device_name(0))
+def log(msg):
+    global log_history
+    line = msg if isinstance(msg, str) else str(msg)
+    log_history.append(line)
+    if len(log_history) > 100:
+        del log_history[:-50]  # Храним только последние 50 / Last 50 prints
+
+    # Сдфк ыскуут / Очистка экрана
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+    # Печатаем последние строки
+    for l in log_history[-50:]:
+        print(l)
 
 
-# === Model Loading === → # === Загрузка модели ===
-
-print("🧠 / Loading Whisper model / Загружаем модель Whisper...")
-model = whisper.load_model(f"{WHISPER_MODEL}", device=DEVICE)
-
-# === Sending Keystrokes === → # === Отправка клавиш ===
+# === Send hotkey / Отправка горячей клавиши ===
 def send_hotkey(key):
     if 0 <= key <= 9:
         try:
-            keyboard.send(str(key))  # обычная цифра
+            keyboard.send(str(key))
         except ValueError as e:
-            print(f"❌ Error while sending / Ошибка при отправке: {e}")
+            log(f"❌ Error while sending / Ошибка при отправке: {e}")
     else:
-        print("❌ Error: key out of range 0–9  / Ошибка: ключ вне диапазона 0–9")
+        log("❌ Error: key out of range 0–9 / Ошибка: ключ вне диапазона 0–9")
 
-# === Command Processing === → # === Обработка команды ===
+# === Handle command / Обработка команды ===
 def handle_command(text):
     text = text.strip().lower()
     if stop_word in text or stop_word2 in text:
-        print("🚩 Command 'stop' received — terminating. / Получена команда 'стоп' — завершение.")
+        log("🚩 Command 'stop' received / Получена команда 'стоп' — завершение.")
         return False
 
     for i in range(10):
         hotkey = globals().get(f"hotkey{i}")
         if hotkey and hotkey in text:
-            print(f"🎯 Hotkey triggered / Сработал hotkey{i} ('{hotkey}') — sending / отправляем {i}")
+            log(f"🎯 Hotkey{i} triggered ('{hotkey}') / Сработал hotkey{i} ('{hotkey}') — отправляем {i}")
             send_hotkey(i)
             return True
 
-    print("🤷 Command not recognized / Команда не распознана")
+    log("🤷 Command not recognized / Команда не распознана")
     return True
 
-# === Проверка громкости ===
+# === Volume check / Проверка громкости ===
 def is_loud(data, threshold):
     return np.max(np.abs(data)) > threshold
 
-# === Основной цикл прослушивания ===
+# === Main listen loop / Основной цикл прослушивания ===
 def listen_loop():
-    print("🎧 Starting infinite listening loop...  / Начинаем бесконечный цикл прослушивания...")
+    log("🎧 Starting infinite listening loop / Начинаем бесконечный цикл прослушивания...")
 
     buffer_chunks = int(PRE_RECORD_SECONDS / CHUNK_DURATION)
     pre_buffer = deque(maxlen=buffer_chunks)
 
     device_info = sd.query_devices(kind='input')
     input_channels = device_info['max_input_channels']
-    print(f"🎚️ Detected input channels / Обнаружено входных каналов: {input_channels}")
+    log(f"🎚️ Detected input channels: {input_channels} / Обнаружено входных каналов: {input_channels}")
 
     while True:
-        print("🔎 Waiting for sound... / Ожидание звука...")
+        log("🔎 Waiting for sound... / Ожидание звука...")
 
         recording = []
         silence_time = 0.0
@@ -114,7 +106,9 @@ def listen_loop():
         def callback(indata, frames, time_info, status):
             nonlocal recording, silence_time, recording_started, stop_stream
 
-            # Преобразуем в моно, если нужно
+            volume = np.linalg.norm(indata)
+            log("🔊 MIC Volume / Громкость: {:.5f}".format(volume))
+
             if indata.shape[1] > 1:
                 mono_data = np.mean(indata, axis=1, keepdims=True)
             else:
@@ -124,17 +118,17 @@ def listen_loop():
 
             if is_loud(mono_data, THRESHOLD):
                 if not recording_started:
-                    print("🔴 Sound detected, starting recording... / Обнаружен звук, начинаем запись...")
+                    log("🔴 Sound detected / Обнаружен звук — начинаем запись...")
                     recording.extend(list(pre_buffer))
                     recording_started = True
                 silence_time = 0.0
                 recording.append(mono_data.copy())
             elif recording_started:
                 silence_time += CHUNK_DURATION
-                print(f"🟡 Silence / Тишина {silence_time:.2f} сек...")
+                log(f"🟡 Silence {silence_time:.2f} sec... / Тишина {silence_time:.2f} сек...")
                 recording.append(mono_data.copy())
                 if silence_time >= SILENCE_DURATION:
-                    print("⏹️ Recording finished / Запись завершена")
+                    log("⏹️ Recording finished / Запись завершена")
                     stop_stream = True
 
         with sd.InputStream(callback=callback,
@@ -145,20 +139,42 @@ def listen_loop():
                 sd.sleep(int(CHUNK_DURATION * 1000))
 
         if not recording:
-            print("🟡 Sound not detected — nothing recognized / Звук не был обнаружен — ничего не распознано")
+            log("🟡 No sound detected / Звук не был обнаружен")
             continue
 
-        print(f"✅ Processing / Обработка {len(recording)} cunks / чанков...")
+        log(f"✅ Processing {len(recording)} chunks / Обработка {len(recording)} чанков...")
         full = np.concatenate(recording).flatten().astype(np.float32)
 
         try:
             result = model.transcribe(full, language=LANGUAGE, fp16=FP16)
-            print("📝 Recognized text / Распознанный текст:", result["text"])
+            log("📝 Recognized text / Распознанный текст: " + result["text"])
             if not handle_command(result["text"]):
                 break
         except Exception as e:
-            print(f"❌ Error during recognition / Ошибка при распознавании: {e}")
+            log(f"❌ Error during recognition / Ошибка при распознавании: {e}")
 
-# === Точка входа ===
-if __name__ == "__main__":
+# === Entry point / Точка входа ===
+def main():
+    global model, DEVICE, FP16
+
+    if torch.cuda.is_available():
+        DEVICE = "cuda"
+        FP16 = True
+        log("⚡ Using GPU (CUDA) / Используем GPU (CUDA)")
+    else:
+        DEVICE = "cpu"
+        FP16 = False
+        log("🖥 Using CPU / Используем CPU")
+
+    log(f"CUDA available / CUDA доступна: {torch.cuda.is_available()}")
+    if torch.cuda.is_available():
+        log(f"Device qty: {torch.cuda.device_count()} / Количество устройств: {torch.cuda.device_count()}")
+        log(f"Device name: {torch.cuda.get_device_name(0)} / Имя устройства: {torch.cuda.get_device_name(0)}")
+
+    log("🧠 Loading Whisper model / Загружаем модель Whisper...")
+    model = whisper.load_model(WHISPER_MODEL, device=DEVICE)
+
     listen_loop()
+
+if __name__ == "__main__":
+    main()
