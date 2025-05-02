@@ -2,6 +2,8 @@
 
 ## Setup
 
+**If Microsoft’s speech recognizer doesn’t support your native language, this setup provides a great alternative. It lets you use commands in your preferred language without relying on English**
+
 I used Python 3.13.3
 
 1. Download and install [Python 3.13.2](https://www.python.org/downloads/)
