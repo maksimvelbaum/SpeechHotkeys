@@ -13,7 +13,13 @@ I used Python 3.13.3
 
  ![1](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/1.png?raw=true)
 
- [2](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/2.png?raw=true)
+ ![2](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/2.png?raw=true)
+
+ ![3](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/3.png?raw=true)
+
+ ![4](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/4.png?raw=true)
+
+ 
  
 6. Open PowerShell with Admin Rights and paste "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
  ```bash
