@@ -115,4 +115,121 @@ Hope it was helpful
 [![coffee](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/coffee.gif?raw=true)](https://www.buymeacoffee.com/maksim_velbaum)
 
 
+[[Сайт разработчика]](https://velbaum.cc) [[Угостить кофе]](https://buymeacoffee.com/maksim_velbaum)
+
+## Установка
+
+**Данная настройка полезна только если распознаватель речи Microsoft не поддерживает ваш родной язык, эта настройка предоставляет отличную альтернативу. Она позволяет использовать команды на вашем предпочитаемом языке без необходимости полагаться на английский. Если SP поддерживает ваш родной язык, VoiceAttack выглядит лучшим выбором**
+
+[Поддерживаемые языки](https://platform.openai.com/docs/guides/speech-to-text/prompting#supported-languages)
+
+Я использовал Python 3.13.3
+
+1. Скачайте и установите [Python 3.13.2](https://www.python.org/downloads/)
+2. Скачайте и установите [AutoHotkey v2](https://www.autohotkey.com/) (проверено на версии 2.0.19)
+3. Скачайте [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (проверено на версии: 2025-05-01-git-707c04fe06 — также прилагается в репозитории)
+4. Распакуйте ffmpeg куда-нибудь, например в `C:\ffmpeg`.  
+   Откройте поиск Windows и найдите "Изменить системные переменные среды" > Дополнительно > Переменные среды > Системные переменные > выберите `Path` и нажмите **Изменить**, затем **Создать**, и добавьте `C:\ffmpeg\bin`.  
+   Сохраните и закройте.
+
+![1](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/1.png?raw=true)  
+![2](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/2.png?raw=true)  
+![3](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/3.png?raw=true)  
+![4](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/4.png?raw=true)  
+
+6. Откройте PowerShell с правами администратора и вставьте следующее:
+
+![power_shell](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/power_shell.png?raw=true)
+
+```bash
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+6. Откройте PowerShell или CMD и проверьте версию Python с помощью:
+
+```bash
+python --version
+```
+
+Если отображается Python 3.13.3, всё в порядке.
+
+7. Вернитесь в папку `SpeechHotkeys` и запустите `01_install` (выберите "Выполнить в любом случае"), или запустите его из терминала (CMD/PowerShell), чтобы увидеть ошибки, если они есть:
+
+```bash
+cmd /c 01_install.bat
+```
+
+> Рекомендую запускать из терминала, чтобы видеть ошибки, если они появятся.
+
+8. `01_install.bat` запустит программу, НО, скорее всего, она будет работать на CPU, что очень медленно. Закройте программу с помощью Ctrl+C.
+
+9. Теперь вам нужно решить, хотите ли вы использовать GPU для Whisper AI или оставить CPU.  
+   Если вы используете CPU, переходите к следующему шагу.  
+   Если вы хотите использовать GPU, продолжайте:
+
+10. Откройте терминал в папке проекта и активируйте виртуальное окружение:
+
+```bash
+.\venv\Scripts\activate
+```
+
+11. Установите PyTorch. Я рекомендую спросить у GPT, какую версию установить.  
+    ТОЛЬКО В КАЧЕСТВЕ ПРИМЕРА — для моего GPU (RTX 3080) я использовал:
+
+```bash
+pip uninstall torch
+pip install torch --index-url https://download.pytorch.org/whl/cu118
+```
+
+12. После установки проверьте, что CUDA работает:
+
+```bash
+python -c "import torch; print(torch.cuda.get_device_name(0))"
+```
+
+13. Если вы видите что-то вроде `NVIDIA GeForce RTX 3080`, всё правильно.  
+    Пожалуйста, не публикуйте проблемы, связанные с другими GPU — у меня просто нет времени их отлаживать.
+
+14. Теперь выберите [Модель Whisper](https://github.com/openai/whisper/blob/main/model-card.md).  
+    Для английского языка достаточно `base` или даже `tiny`.  
+    Для других языков лучше выбрать `small`.  
+    Модели хранятся в:
+
+```bash
+C:\Users\_пользователь_\.cache\whisper
+```
+
+15. Откройте `app.py` с помощью Блокнота или вашей IDE.
+
+16. Отредактируйте следующие настройки:
+
+```bash
+WHISPER_MODEL =  # выберите модель; большие медленные, используйте small для CPU
+THRESHOLD =  # чувствительность микрофона; меньшее число = более чувствительный
+LANGUAGE =  # установите код языка
+hotkey0 = ""  # если это слово найдено, будет отправлена клавиша 0
+hotkey1 = ""
+hotkey2 = ""
+hotkey3 = ""
+hotkey4 = ""
+hotkey5 = ""
+hotkey6 = ""
+hotkey7 = ""
+hotkey8 = ""
+hotkey9 = ""
+stop_word = "стоп"  # стоп-слово для остановки скрипта
+stop_word2 = "stop"  # альтернативное стоп-слово
+```
+
+17. Последний шаг — настройка скрипта Autohotkey.  
+    Пример профиля для **The Elder Scrolls IV: Oblivion Remastered** включен.  
+    (В игре привяжите заклинания к NUM1–NUM9)
+
+![6](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/6.png?raw=true)
+
+Надеюсь, это было полезно
+
+[![coffee](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/coffee.gif?raw=true)](https://www.buymeacoffee.com/maksim_velbaum)
+
+
 
