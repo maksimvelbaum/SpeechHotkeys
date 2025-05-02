@@ -6,6 +6,8 @@
 
 [Supported languages](https://platform.openai.com/docs/guides/speech-to-text/prompting#supported-languages)
 
+This script is using locally [Whisper AI](https://github.com/openai/whisper)
+
 I used Python 3.13.3
 
 1. Download and install [Python 3.13.2](https://www.python.org/downloads/)
@@ -121,7 +123,10 @@ Hope it was helpful
 
 **Данная настройка полезна только если распознаватель речи Microsoft не поддерживает ваш родной язык, эта настройка предоставляет отличную альтернативу. Она позволяет использовать команды на вашем предпочитаемом языке без необходимости полагаться на английский. Если SP поддерживает ваш родной язык, VoiceAttack выглядит лучшим выбором**
 
+
 [Поддерживаемые языки](https://platform.openai.com/docs/guides/speech-to-text/prompting#supported-languages)
+
+Этот скрипт использует локально  [Whisper AI](https://github.com/openai/whisper)
 
 Я использовал Python 3.13.3
 
