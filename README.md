@@ -10,7 +10,7 @@ This script is using locally [Whisper AI](https://github.com/openai/whisper)
 
 I used Python 3.13.3
 
-1. Download and install [Python 3.13.2](https://www.python.org/downloads/)
+1. Download and install [Python 3.13.3](https://www.python.org/downloads/)
 2. Download and install [AutoHotkey v2](https://www.autohotkey.com/) (tested on version 2.0.19)
 3. Download [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) (tested on version: 2025-05-01-git-707c04fe06)
 4. Extract ffmpeg somewhere, for example to `C:\ffmpeg`.  
