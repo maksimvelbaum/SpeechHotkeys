@@ -22,6 +22,9 @@ I used Python 3.13.3
  
  
 6. Open PowerShell with Admin Rights and paste "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
+
+![power_shell](https://github.com/maksimvelbaum/SpeechHotkeys/blob/main/98_README_PICTURES/power_shell.png?raw=true)
+
  ```bash
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
