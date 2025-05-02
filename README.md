@@ -69,5 +69,7 @@ stop_word = "стоп"  stop word for stoping script
 stop_word2 = "stop"  stop word for stoping script 
 ```
 
+17. Next setup you will need to do in Autohotkey ahk script, here will  be attached profile for The Elder Scrolls IV: Oblivion Remastered ( in game you need set spells to NUM1 - NUM9 ) 
+
 
 
