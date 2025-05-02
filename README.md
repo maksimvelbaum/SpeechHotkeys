@@ -2,7 +2,7 @@
 
 ## Setup
 
-**This Setup is useful only ff Microsoft’s speech recognizer doesn’t support your native language, this setup provides a great alternative. It lets you use commands in your preferred language without relying on English**
+**This Setup is useful only if Microsoft’s speech recognizer doesn’t support your native language, this setup provides a great alternative. It lets you use commands in your preferred language without relying on English, for English VoiceAttack looks like better choise**
 
 I used Python 3.13.3
 
