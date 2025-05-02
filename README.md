@@ -51,22 +51,23 @@ python -c "import torch; print(torch.cuda.get_device_name(0))"
 15. Open app.py with Notepead or any other IDE for editing.
 
 16. You need to change
- -WHISPER_MODEL = according to your choise, just remember large models will take too much time to proceed , for CPU will be better small models
- -THRESHOLD  = MIC sensivity ,  less number more sensetive
- -LANGUAGE = set language code
-    hotkey0 = "" == if this word will be found in reply from Whisper, key 0 will be send to Autohotkeys
-    hotkey1 = "" == key 1
-    hotkey2 = "" == key 2
-    hotkey3 = ""
-    hotkey4 = ""
-    hotkey5 = ""
-    hotkey6 = ""
-    hotkey7 = ""
-    hotkey8 = ""
-    hotkey9 = ""
-    stop_word = "стоп"  stop word for stoping script 
-    stop_word2 = "stop"  stop word for stoping script 
-
+```bash
+WHISPER_MODEL = according to your choise, just remember large models will take too much time to proceed , for CPU will be better small models
+THRESHOLD  = MIC sensivity ,  less number more sensetive
+LANGUAGE = set language code
+hotkey0 = "" == if this word will be found in reply from Whisper, key 0 will be send to Autohotkeys
+hotkey1 = "" == key 1
+hotkey2 = "" == key 2
+hotkey3 = ""
+hotkey4 = ""
+hotkey5 = ""
+hotkey6 = ""
+hotkey7 = ""
+hotkey8 = ""
+hotkey9 = ""
+stop_word = "стоп"  stop word for stoping script 
+stop_word2 = "stop"  stop word for stoping script 
+```
 
 
 [buymeacoffee.com/maksim_velbaum](https://buymeacoffee.com/maksim_velbaum)
