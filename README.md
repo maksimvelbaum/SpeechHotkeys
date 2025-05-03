@@ -2,7 +2,7 @@
 
 ## Setup
 
-**This Setup is useful only if Microsoft’s speech recognizer doesn’t support your native language, this setup provides a great alternative. It lets you use commands in your preferred language without relying on English, if SP supports your native language,  VoiceAttack looks like better choise**
+**This Setup is useful only if Microsoft’s speech recognizer doesn’t support your native language, this setup provides a great alternative. It lets you use commands in your preferred language without relying on English, if SP supports your native language,  VoiceAttack looks like better choice**
 
 [Installation Video](https://www.youtube.com/watch?v=BlPZ7MUV7fA)
 
